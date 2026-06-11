@@ -1,0 +1,2031 @@
+﻿/* =================================
+   GROCERY STORE APP CASE STUDY STYLES
+   ================================= */
+
+/* Import Fredoka font */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+/* =================================
+   LOADING SCREEN
+   ================================= */
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.2s ease-out;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.loading-logo {
+  width: 160px;
+  filter: invert(0.7);
+  animation: logo-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes logo-pulse {
+  0%, 100% {
+    transform: scale(0.75);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+}
+
+/* =================================
+   FREDOKA TYPEFACE STYLING
+   ================================= */
+
+.pacifico-text {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: normal;
+  color: #FF8C00; /* Orange color for "Fresh" */
+}
+
+.green-text {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: normal;
+  color: #6DA920; /* Green color for "Market" */
+}
+
+/* =================================
+   BASE LAYOUT & SPACING
+   ================================= */
+
+.grocery-page {
+  background: var(--grocery-app-white);
+}
+
+.contentGroceryPage {
+  width: 100%;
+  min-height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--grocery-app-white);
+  position: relative;
+  z-index: 1;
+}
+
+/* Header scroll behavior for grocery page */
+.grocery-page .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 998; /* Lower than hamburger menu z-index: 10000 */
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-bottom 3.5s ease;
+}
+
+.grocery-page .header.hide {
+  transform: translateY(-100%);
+}
+
+.grocery-page .header.show {
+  transform: translateY(0);
+}
+
+/* =================================
+   HERO SECTION
+   ================================= */
+
+.hero-section {
+  position: relative;
+  height: calc(100vh - var(--header-height, 75px));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--grocery-app-text);
+  padding: 0 0 80px 0;
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: clamp(20px, 89px, 8vh);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h0-font-size);
+  color: white !important;
+  margin: 0 0 clamp(0.5vh, 1.3vw, 1.5vh) 0;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  letter-spacing: 0.08vw;
+}
+
+.hero-tagline {
+  font-family: var(--body-font-family);
+  font-size: var(--h6-font-size);
+  color: var(--grocery-app-text-light) !important;
+  margin: 0 0 clamp(1vh, 3.4vw, 3vh) 0;
+  opacity: 0.95;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  font-weight: var(--font-weight-medium);
+}
+
+.hero-phone-mockup {
+  width: clamp(25vh, 38.2vw, 45vh);
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+}
+
+/* Scroll Down Arrow */
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--grocery-app-success) 0%, #ff6b7d 100%);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: white;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 24px rgba(255, 71, 87, 0.25);
+  animation: bounce 2s infinite;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.scroll-down-arrow:hover {
+  background: #6DA920;
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 8px 32px rgba(109, 169, 32, 0.35);
+}
+
+.scroll-down-arrow:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+.scroll-down-arrow svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =================================
+   PROJECT OVERVIEW SECTION
+   ================================= */
+
+.overview-section {
+  padding: 55px 89px;
+  background: var(--grocery-app-white);
+}
+
+.overview-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.overview-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 34px 0;
+  text-align: center;
+}
+
+.overview-description {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  line-height: 1.6;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 34px auto;
+  opacity: 0.8;
+}
+
+.overview-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 21px;
+}
+
+.tag {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--body-font-size);
+  background: var(--grocery-app-success);
+  color: var(--grocery-app-text-light);
+  padding: 12px 24px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+}
+
+/* =================================
+   STYLE GUIDE SECTION
+   ================================= */
+
+.style-guide-section {
+  padding: 55px 89px;
+  background: var(--grocery-app-section-bg);
+}
+
+.style-guide-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.style-guide-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 34px 0;
+  text-align: center;
+}
+
+.style-guide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  align-items: stretch;
+}
+
+.color-palette-side,
+.typography-side {
+  background: white;
+  padding: 34px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.palette-subtitle,
+.typography-subtitle {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--h5-font-size);
+  color: var(--grocery-app-text);
+  margin: 0 0 34px 0;
+}
+
+.palette-rule-description {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  line-height: 1.5;
+  margin: 0 0 34px 0;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.color-swatches {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.color-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 21px;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--grocery-app-border);
+}
+
+.color-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.color-group-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.color-group-label {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--h6-font-size);
+  color: var(--grocery-app-text);
+  min-width: 60px;
+  width: 60px;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.color-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.color-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.color-code {
+  font-family: var(--body-font-family);
+  font-size: var(--h7-font-size);
+  color: var(--grocery-app-text);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+}
+
+.color-group-description {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.color-group-description p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.8;
+  text-align: left;
+}
+
+.color-swatch {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  border: 1px solid var(--grocery-app-border);
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.color-white { background-color: #FFFFFF; }
+.color-light-gray { background-color: #F1F1F1; }
+.color-medium-gray { background-color: #A4A4A4; }
+.color-dark-gray { background-color: #383838; }
+.color-very-dark { background-color: #191919; }
+.color-green { background-color: #6DA920; }
+.color-orange { background-color: #FFA400; }
+
+.typography-description {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.typography-samples {
+  margin-bottom: 32px;
+}
+
+.typography-main-font {
+  margin-bottom: 34px;
+}
+
+.typography-font-name {
+  font-family: "Myriad Pro", Arial, sans-serif;
+  font-weight: normal;
+  font-size: var(--h5-font-size);
+  color: var(--grocery-app-text);
+  margin: 0;
+  text-align: center;
+}
+
+.type-sample {
+  margin-bottom: 34px;
+}
+
+.type-label-container {
+  margin-bottom: 15px;
+}
+
+.type-label-tag {
+  display: inline-block;
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--h7-font-size);
+  background: #F5F5F5;
+  color: var(--grocery-app-text);
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid #E5E5E5;
+}
+
+.sample-h1-myriad {
+  font-family: "Myriad Pro", Arial, sans-serif;
+  font-weight: normal;
+  font-size: 31px;
+  color: var(--grocery-app-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sample-h2-myriad {
+  font-family: "Myriad Pro", Arial, sans-serif;
+  font-weight: normal;
+  font-size: 19px;
+  color: var(--grocery-app-text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.sample-h3-myriad {
+  font-family: "Myriad Pro", Arial, sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  color: var(--grocery-app-text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.font-weight-samples {
+  text-align: center;
+}
+
+.weight-comparison {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 8px;
+}
+
+.myriad-regular,
+.myriad-bold {
+  font-family: "Myriad Pro", Arial, sans-serif;
+  font-size: var(--h5-font-size);
+  color: var(--grocery-app-text);
+}
+
+.myriad-regular {
+  font-weight: normal;
+}
+
+.myriad-bold {
+  font-weight: bold;
+}
+
+.sample-label {
+  font-family: var(--body-font-family);
+  font-size: var(--h7-font-size);
+  color: var(--grocery-app-text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* =================================
+   LOW-FIDELITY SKETCHES SECTION
+   ================================= */
+
+.low-fidelity-sketches-container {
+  padding: 55px 89px;
+  background-image: url('../Assets/GroceryStoreApp/Watermelon.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  min-height: auto;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.low-fidelity-sketches-title,
+.low-fidelity-sketches-description,
+.sketches-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.low-fidelity-sketches-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0;
+  text-align: center;
+  background: rgba(255,255,255,1);
+  padding: 34px;
+  border-radius: 8px;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.low-fidelity-sketches-description {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  text-align: center;
+  margin: 34px auto 34px auto;
+  opacity: 1;
+  max-width: 600px;
+  line-height: 1.6;
+  background: rgba(255,255,255,1);
+  padding: 34px;
+  border-radius: 6px;
+}
+
+.sketches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 34px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+  z-index: 2;
+  position: relative;
+}
+
+.sketch-item {
+  background-image: url('../Assets/GroceryStoreApp/Watermelon.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 16px rgba(180, 35, 50, 0.25),
+    0 8px 12px rgba(0, 0, 0, 0.3),
+    -4px 8px 12px rgba(0, 0, 0, 0.2),
+    4px 8px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sketch-image {
+  width: 100%;
+  height: 600px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: transparent;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.sketch-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(180, 35, 50, 0.35);
+  z-index: 10;
+}
+
+.sketch-label {
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  font-size: var(--h8-font-size);
+  color: #333333;
+  margin: 0;
+  padding: 21px;
+  text-align: center;
+  background: white;
+  position: relative;
+  z-index: 2;
+}
+
+/* =================================
+   INDIVIDUAL MOCKUP SCREENS
+   ================================= */
+
+.ui-mockups-section {
+  overflow-x: hidden;
+}
+
+.ui-mockups-section .mockup-screen {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../Assets/GroceryStoreApp/lemon_slice_pattern_background.jpg');
+  background-size: auto 50%;
+  background-position: top left;
+  background-repeat: repeat;
+  box-sizing: border-box;
+}
+
+.mockup-content {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.mockup-text {
+  padding: 34px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.mockup-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h5-font-size);
+  color: #000000;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+}
+
+.mockup-description {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.mockup-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.mockup-screen-image {
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Alternate layout for even screens */
+.ui-mockups-section .mockup-screen:nth-child(even) .mockup-content {
+  grid-template-columns: 1fr 1fr;
+  direction: rtl;
+}
+
+.ui-mockups-section .mockup-screen:nth-child(even) .mockup-text,
+.ui-mockups-section .mockup-screen:nth-child(even) .mockup-image-wrapper {
+  direction: ltr;
+}
+
+/* =================================
+   HEADER CONTAINER STYLING
+   ================================= */
+
+.header-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 54px 34px 34px 34px;
+  text-align: center;
+  position: relative;
+}
+
+.header-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: url('../Assets/GroceryStoreApp/lemon_slice_pattern_background.jpg');
+  background-size: auto 50vh;
+  background-position: top left;
+  background-repeat: repeat;
+}
+
+.header-container h2 {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 24px 0;
+}
+
+.header-container p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+   ================================= */
+
+/* Responsive mockup screens */
+@media (max-width: 768px) {
+  .ui-mockups-section .mockup-screen {
+    min-height: 90vh;
+    padding: 60px 20px;
+  }
+  
+  .mockup-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .ui-mockups-section .mockup-screen:nth-child(even) .mockup-content {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+  
+  .mockup-text {
+    padding: 30px;
+  }
+  
+  .mockup-title {
+    font-size: var(--h3-font-size);
+  }
+  
+  .mockup-description {
+    font-size: var(--body-font-size);
+  }
+}
+
+@media (max-width: 430px) {
+  .ui-mockups-section .mockup-screen {
+    min-height: 85vh;
+    padding: 40px 15px;
+  }
+  
+  .mockup-text {
+    padding: 24px;
+  }
+  
+  .mockup-title {
+    font-size: var(--h4-font-size);
+    margin-bottom: 16px;
+  }
+  
+  .mockup-description {
+    font-size: var(--h7-font-size);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =================================
+   HAMBURGER MENU Z-INDEX & STYLING
+   ================================= */
+
+/* Ensure hamburger menu is above header */
+.grocery-page .hamburger-menu {
+  z-index: 10000;
+}
+
+/* Hamburger menu underline colors - use red from buttons */
+.grocery-page .hamburger-menu .work-underline,
+.grocery-page .hamburger-menu .about-underline,
+.grocery-page .hamburger-menu .contact-underline {
+  background-color: #FF4757;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =================================
+   TRY EXPERIENCE SECTION
+   ================================= */
+
+.try-experience-section {
+  padding: 55px 0 0 0;
+  background: var(--grocery-app-section-bg);
+  width: 100%;
+  overflow: hidden;
+}
+
+.try-experience-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 89px;
+  box-sizing: border-box;
+  text-align: center;
+  height: fit-content;
+}
+
+/* =================================
+   USER FLOW SECTION
+   ================================= */
+
+.user-flow-section {
+  padding: 0;
+  background: transparent;
+  width: 100%;
+  overflow: hidden;
+  display: none; /* Hidden by default (desktop/tablet) */
+}
+
+.prototype-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 34px 0;
+  text-align: center;
+}
+
+.prototype-subtitle {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  text-align: center;
+  margin: 0 0 34px 0;
+  opacity: 0.8;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 34px;
+}
+
+/* Navigation Buttons */
+.prototype-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 34px;
+  flex-wrap: wrap;
+}
+
+.prototype-nav-btn {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--body-font-size);
+  background: white;
+  color: var(--grocery-app-text);
+  border: 2px solid var(--grocery-app-border);
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.prototype-nav-btn:hover {
+  background: #6DA920;
+  color: white;
+  border-color: #6DA920;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.prototype-nav-btn.active {
+  background: var(--grocery-app-success);
+  color: white;
+  border-color: var(--grocery-app-success);
+  box-shadow: 0 4px 16px rgba(109, 169, 32, 0.3);
+}
+
+.prototype-nav-btn.active:hover {
+  background: var(--grocery-app-success);
+  border-color: var(--grocery-app-success);
+}
+
+.prototype-content {
+  position: relative;
+  width: 100%;
+  margin: 0 0 34px 0;
+  padding: 0;
+  min-height: 600px;
+}
+
+.figma-embed {
+  display: none;
+  background: white;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  margin-bottom: 0;
+  animation: fadeIn 0.5s ease;
+}
+
+.figma-embed.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================================
+   VIDEO DEMO SECTION (FULL WIDTH)
+   ================================= */
+
+.video-demo {
+  width: 100%;
+  position: relative;
+  background: transparent;
+  background-image: url('../Assets/GroceryStoreApp/white_wooden_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border-radius: 0;
+  padding: 55px 89px;
+  box-shadow: none;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.video-demo > * {
+  position: relative;
+  z-index: 2;
+}
+
+.demo-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 42px 0;
+  text-align: center;
+  padding: 0;
+  background: rgba(255,255,255,1);
+  padding: 13px 21px;
+  border-radius: 8px;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 34px;
+}
+
+.figma-frame {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.figma-frame iframe {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  border: 1px solid var(--grocery-app-border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.figma-note {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  text-align: center;
+  margin: 34px auto 55px auto;
+  opacity: 0.8;
+  max-width: 600px;
+}
+
+.video-description {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: #2a2a2a;
+  text-align: center;
+  margin: 34px 0 0 0;
+  opacity: 1;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 34px;
+  padding: 13px 21px;
+  text-shadow: 0 0 4px rgba(255,255,255,0.7);
+  background: rgba(255,255,255,1);
+  border-radius: 6px;
+}
+
+.video-frame {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-frame video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-frame video:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.interactions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 34px;
+  margin-top: 0;
+}
+
+.interaction-item {
+  text-align: center;
+  padding: 34px;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.interaction-item:hover {
+  background: var(--grocery-app-section-bg);
+}
+
+.interaction-icon {
+  font-size: 48px;
+  margin: 0 auto 21px auto;
+  line-height: 1;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.interaction-item h4 {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--h5-font-size);
+  color: var(--grocery-app-text);
+  margin: 0 0 24px 0;
+}
+
+.interaction-item p {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* =================================
+   KEY INTERACTIONS SECTION
+   ================================= */
+
+.key-interactions-section {
+  padding: 55px 89px;
+  background: var(--grocery-app-white);
+}
+
+.key-interactions-container {
+  text-align: center;
+}
+
+.interactions-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 34px 0;
+  text-align: center;
+}
+
+/* =================================
+   CLOSING SECTION
+   ================================= */
+
+.closing-section {
+  padding: 55px 89px 55px 89px;
+  background-image: url('../Assets/GroceryStoreApp/Kiwi.jpg');
+  background-size: auto 50vh;
+  background-position: top left;
+  background-repeat: repeat;
+  text-align: center;
+}
+
+.closing-container {
+  width: 100%;
+  margin: 0;
+}
+
+.closing-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 auto 34px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 34px;
+  border-radius: 16px;
+  display: inline-block;
+}
+
+.closing-image {
+  margin-bottom: 34px;
+}
+
+.context-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.closing-text {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  color: var(--grocery-app-text);
+  line-height: 1.6;
+  margin: 0 auto 34px auto;
+  max-width: 700px;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 34px;
+  border-radius: 16px;
+}
+
+.closing-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+}
+
+.cta-text {
+  font-family: var(--body-font-family);
+  font-size: var(--h5-font-size);
+  color: var(--grocery-app-text);
+  margin: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 34px;
+  border-radius: 16px;
+  display: inline-block;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--h5-font-size);
+  background: var(--grocery-app-success);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(255, 71, 87, 0.3);
+}
+
+.cta-button:hover {
+  background: #6DA920;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(109, 169, 32, 0.4);
+}
+
+/* =================================
+   OTHER PROJECTS SECTION
+   ================================= */
+
+.other-projects-section {
+  padding: 55px 89px;
+  background: var(--grocery-app-section-bg);
+}
+
+.other-projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.other-projects-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--h3-font-size);
+  color: var(--grocery-app-subheaders);
+  margin: 0 0 34px 0;
+  text-align: center;
+  border-bottom: 3px solid var(--grocery-app-secondary);
+  padding-bottom: 16px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.project-item {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-item:hover {
+  background: #6DA920;
+  transform: translateY(-8px);
+  box-shadow: 0 16px 16px -8px rgba(109, 169, 32, 0.7);
+}
+
+.project-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.project-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-item:hover .project-image img {
+  transform: scale(1.1);
+}
+
+.project-info {
+  padding: 34px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-title {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--h4-font-size);
+  color: var(--grocery-app-text-light);
+  margin: 0 0 12px 0;
+}
+
+.project-description {
+  font-family: var(--body-font-family);
+  font-size: var(--h6-font-size);
+  color: var(--grocery-app-text-light);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.project-tag {
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--small-font-size);
+  background: var(--grocery-app-success);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+  margin-top: auto;
+  transition: background 0.3s ease;
+}
+
+.project-item:hover .project-tag {
+  background: #6DA920;
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+   ================================= */
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hero-section {
+    height: calc(100vh - var(--header-height, 75px));
+    padding: 0 0 80px 0;
+    align-items: center;
+  }
+  
+  .hero-container {
+    padding: clamp(20px, 3vh, 40px);
+    margin-bottom: 0;
+    justify-content: center;
+    gap: clamp(1vh, 2vh, 3vh);
+  }
+  
+  .hero-title {
+    margin: 0 0 clamp(0.8vh, 1.2vw, 1.2vh) 0;
+  }
+  
+  .hero-tagline {
+    margin: 0 0 clamp(1.5vh, 2.5vw, 2.5vh) 0;
+  }
+  
+  .hero-phone-mockup {
+    height: clamp(45vh, 55vh, 65vh);
+    width: auto;
+    max-width: 80%;
+  }
+  
+  .overview-section,
+  .style-guide-section,
+  .low-fidelity-sketches-container,
+  .key-interactions-section,
+  .closing-section,
+  .other-projects-section {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+  
+  .ui-mockups-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .mockup-content {
+    padding: 0 55px;
+  }
+  
+  .try-experience-wrapper {
+    padding: 0 89px;
+  }
+  
+  .video-demo {
+    padding: 55px 89px;
+  }
+  
+  .video-frame video {
+    max-width: 700px;
+    border-radius: 14px;
+  }
+  
+  .header-container {
+    width: 100%;
+  }
+  
+  .closing-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .color-group {
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+  }
+  
+  .color-group-left {
+    min-width: 0;
+    overflow: hidden;
+  }
+  
+  .color-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .color-item {
+    width: auto;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  
+  .color-swatch {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .color-code {
+    font-size: var(--h10-font-size);
+  }
+  
+  .color-group-description {
+    padding-top: 4px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  
+  .color-group-description p {
+    font-size: var(--h7-font-size);
+  }
+}
+
+/* Mobile Large */
+@media (min-width: 430px) and (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    padding: 30px 0 70px 0;
+    align-items: flex-start;
+  }
+  
+  .hero-container {
+    padding: 30px 20px;
+    margin-bottom: 30px;
+  }
+  
+  .hero-title {
+    margin: 0 0 2.1vw 0;
+  }
+  
+  .hero-tagline {
+    margin: 0 0 5.5vw 0;
+  }
+  
+  .hero-phone-mockup {
+    width: 48vw;
+  }
+  
+  .mockup-description {
+    padding: 13px;
+    margin: 21px auto;
+  }
+  
+  /* Scroll arrow responsive */
+  .scroll-down-arrow {
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .scroll-down-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .hero-container {
+    margin-bottom: 20px;
+  }
+  
+  .overview-section,
+  .style-guide-section,
+  .low-fidelity-sketches-container,
+  .key-interactions-section,
+  .closing-section,
+  .other-projects-section {
+    padding: 34px 21px;
+  }
+  
+  .try-experience-wrapper {
+    padding: 0 21px;
+  }
+  
+  .video-demo {
+    padding: 34px 21px;
+  }
+  
+  .demo-title,
+  .interactions-title,
+  .video-description {
+    padding: 0 21px;
+  }
+  
+  .hero-title {
+    font-size: var(--h0-font-size);
+  }
+  
+  .hero-tagline {
+    font-size: var(--h6-font-size);
+  }
+  
+  .color-palette-side,
+  .typography-side {
+    padding: 21px;
+  }
+  
+  .color-code {
+    font-size: var(--h10-font-size);
+  }
+  
+  .color-group {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: 21px;
+    padding-bottom: 21px;
+  }
+  
+  .color-group-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .color-group-label {
+    min-width: auto;
+  }
+  
+  .color-group-description p {
+    font-size: var(--h7-font-size);
+  }
+  
+  .ui-mockups-section {
+    padding: 0;
+  }
+  
+  .prototype-nav {
+    gap: 8px;
+  }
+  
+  .prototype-nav-btn {
+    font-size: var(--h6-font-size);
+    padding: 10px 16px;
+  }
+  
+  .prototype-content {
+    min-height: 400px;
+  }
+  
+  .figma-frame iframe {
+    min-height: 350px;
+  }
+  
+  .interactions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 21px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .sketches-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 21px;
+  }
+  
+  .sketch-image {
+    height: 350px;
+  }
+  
+  .figma-frame iframe {
+    height: 350px;
+  }
+  
+  .video-frame video {
+    width: 400px;
+    height: 225px;
+  }
+}
+
+@media (max-width: 630px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 430px) {
+  .hero-container {
+    padding: 34px 21px;
+  }
+  
+  .hero-title {
+    margin: 0 0 2.6vw 0;
+  }
+  
+  .hero-tagline {
+    margin: 0 0 6.8vw 0;
+  }
+  
+  .hero-phone-mockup {
+    width: 55vw;
+  }
+  
+  .mockup-description {
+    padding: 16px;
+    margin: 20px auto;
+  }
+  
+  .overview-section,
+  .style-guide-section,
+  .low-fidelity-sketches-container,
+  .try-experience-section,
+  .key-interactions-section,
+  .closing-section,
+  .other-projects-section {
+    padding: 34px 13px;
+  }
+  
+  .key-interactions-section {
+    padding-top: 0;
+  }
+  
+  .figma-note {
+    margin-bottom: 0;
+  }
+  
+  .try-experience-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
+  .video-demo {
+    padding: 34px 0;
+  }
+  
+  .hero-section {
+    height: auto;
+    padding: 20px 0 60px 0;
+    align-items: flex-start;
+  }
+  
+  .hero-container {
+    margin-bottom: 20px;
+  }
+  
+  .hero-title {
+    font-size: var(--h0-font-size);
+    margin-bottom: 16px;
+  }
+  
+  .hero-tagline {
+    font-size: var(--h6-font-size);
+  }
+  
+  .overview-title,
+  .style-guide-title,
+  .prototype-title,
+  .closing-title,
+  .other-projects-title,
+  .demo-title,
+  .interactions-title {
+    font-size: var(--h3-font-size);
+  }
+  
+  .color-palette-side,
+  .typography-side,
+  .figma-embed {
+    padding: 21px;
+  }
+  
+  .color-swatches {
+    gap: 21px;
+  }
+  
+  .color-group {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: 21px;
+    padding-bottom: 21px;
+  }
+  
+  .color-group-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .color-group-label {
+    min-width: auto;
+  }
+  
+  .color-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow: hidden;
+  }
+  
+  .color-item {
+    gap: 6px;
+  }
+  
+  .color-code {
+    font-size: var(--h10-font-size);
+  }
+  
+  .color-group-description p {
+    font-size: var(--h7-font-size);
+  }
+  
+  .color-swatch {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .mockup-title {
+    font-size: var(--h5-font-size);
+    margin-bottom: 13px;
+  }
+  
+  .mockup-description {
+    font-size: var(--h7-font-size);
+    min-height: 110px; /* Increased fixed height for mobile to match longer descriptions */
+    padding: 10px 18px; /* Adjust padding for mobile */
+  }
+  
+  .ui-mockups-section {
+    padding: 0;
+  }
+  
+  .prototype-nav {
+    gap: 6px;
+  }
+  
+  .prototype-nav-btn {
+    font-size: var(--h6-font-size);
+    padding: 8px 12px;
+  }
+  
+  .prototype-content {
+    min-height: 400px;
+    margin-bottom: 0;
+  }
+  
+  .figma-note {
+    margin-top: 0;
+  }
+  
+  .interactions-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+  
+  .figma-frame iframe {
+    height: 300px;
+    min-height: 300px;
+  }
+  
+  .demo-title,
+  .interactions-title,
+  .video-description {
+    padding: 0 21px;
+  }
+  
+  .interactions-title {
+    margin-top: 21px;
+  }
+  
+  .video-frame video {
+    width: 320px;
+    height: 180px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 21px;
+  }
+  
+  .sketches-grid {
+    grid-template-columns: 1fr;
+    gap: 21px;
+  }
+  
+  .sketch-image {
+    height: 320px;
+  }
+  
+  .low-fidelity-sketches-title {
+    font-size: var(--h3-font-size);
+  }
+  
+  .low-fidelity-sketches-description {
+    font-size: var(--body-font-size);
+  }
+  
+  .project-info {
+    padding: 21px;
+  }
+}
+
+/* =================================
+   FOOTER FIXES FOR GROCERY PAGE
+   ================================= */
+
+/* Override footer styles specifically for grocery page */
+.grocery-page .footer {
+  overflow: visible;
+  height: 100vh; /* Maintain 100vh like other pages */
+  min-height: 200px;
+  /* Green glow and shadow effect on top border */
+  box-shadow: 
+    0 -4px 8px rgba(109, 169, 32, 0.3), /* Top shadow */
+    0 -2px 16px rgba(109, 169, 32, 0.2), /* Outer glow */
+    0 -1px 4px rgba(109, 169, 32, 0.4); /* Inner glow */
+  border-top: 1px solid rgba(109, 169, 32, 0.5); /* Subtle green border */
+}
+
+.grocery-page .footer-content {
+  height: 100%; /* Full height for proper vertical centering */
+  min-height: 200px;
+  align-items: center; /* Ensure vertical centering like other pages */
+}
+
+.grocery-page .footer-sections {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* Preserve responsive footer styling from styles.css */
+}
+
+/* Make Figma embed container background and borders invisible */
+.figma-embed,
+.figma-frame {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* =================================
+   OTHER PROJECTS SECTION - PORTFOLIO SVG
+   ================================= */
+
+.portfolio-svg-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ni-header-footer);
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.portfolio-logo-svg {
+  width: 60%;
+  height: 60%;
+  max-width: 150px;
+  max-height: 150px;
+  filter: brightness(0) saturate(100%) invert(75%) sepia(15%) saturate(312%) hue-rotate(26deg) brightness(88%) contrast(91%);
+}
+
+/* Very short viewport - aggressive scaling */
+@media (max-height: 600px) {
+  .hero-container {
+    padding: clamp(10px, 20px, 3vh);
+  }
+  
+  .hero-title {
+    font-size: clamp(3vh, 4.5vw, 5vh);
+    margin: 0 0 clamp(0.3vh, 1vw, 1vh) 0;
+  }
+  
+  .hero-tagline {
+    font-size: clamp(1.5vh, 1.8vw, 2.5vh);
+    margin: 0 0 clamp(0.8vh, 2vw, 2vh) 0;
+  }
+  
+  .hero-phone-mockup {
+    width: clamp(20vh, 30vw, 35vh);
+  }
+}
+
+/* Extra short viewport - maximum compression */
+@media (max-height: 450px) {
+  .hero-container {
+    padding: 10px;
+    gap: 0.5vh;
+  }
+  
+  .hero-title {
+    font-size: clamp(2.5vh, 4vw, 4vh);
+    margin: 0 0 0.5vh 0;
+  }
+  
+  .hero-tagline {
+    font-size: clamp(1.2vh, 1.5vw, 2vh);
+    margin: 0 0 1vh 0;
+  }
+  
+  .hero-phone-mockup {
+    width: clamp(15vh, 25vw, 25vh);
+  }
+}

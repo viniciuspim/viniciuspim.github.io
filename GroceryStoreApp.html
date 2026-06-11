@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Grocery Store App - Case Study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styleguide.css" />
+  <link rel="stylesheet" href="tarkov-styles.css" />
+  <link rel="stylesheet" href="grocery-styles.css" />
+</head>
+
+<body class="grocery-page">
+  <!-- Loading screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <img src="Assets/LOGO.svg" alt="Loading..." class="loading-logo" />
+    </div>
+  </div>
+
+  <section class="portfolio-section">
+    <header class="header headerTypography">
+      <div class="headerBox">
+        <a href="index.html" class="headerTypo">
+          <img src="Assets/LOGO.svg" alt="Company Logo" class="logo" />
+        </a>
+        <button class="menu-svg">
+          <img src="Assets/menu.svg" alt="Menu" class="menu-icon" />
+        </button>
+        <nav class="nav-links">
+          <div class="nav-item">
+            <a href="#work" class="nav-link headerTypo" id="workLink">WORK</a>
+            <div class="nav-underline" id="workUnderline"></div>
+          </div>
+          <div class="nav-item">
+            <a href="#about" class="nav-link headerTypo" id="aboutLink">ABOUT</a>
+            <div class="nav-underline" id="aboutUnderline"></div>
+          </div>
+          <div class="nav-item">
+            <a href="#contact" class="nav-link headerTypo" id="contactLink">CONTACT</a>
+            <div class="nav-underline" id="contactUnderline"></div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="hamburger-menu headerTypography" id="hamburgerMenu">
+      <ul>
+        <li>
+          <a href="#work" id="hamburgerWorkLink" class="headerTypo">WORK</a>
+          <div class="work-underline" id="hamburgerWorkUnderline"></div>
+        </li>
+
+        <li>
+          <a href="#about" id="hamburgerAboutLink" class="headerTypo">ABOUT</a>
+          <div class="about-underline" id="hamburgerAboutUnderline"></div>
+        </li>
+
+        <li>
+          <a href="#contact" id="hamburgerContactLink" class="headerTypo">CONTACT</a>
+          <div class="contact-underline" id="hamburgerContactUnderline"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="body">
+      <div class="contentGroceryPage">
+        <!-- Hero Section -->
+        <section class="hero-section">
+          <div class="hero-video">
+            <video muted loop>
+              <source src="Assets/GroceryStoreApp/Fragola.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
+          <div class="hero-container">
+            <h1 class="hero-title"><span class="pacifico-text">Fresh</span> <span class="green-text">Market</span></h1>
+            <p class="hero-tagline">A fresh way to shop for groceries</p>
+            <img src="Assets/GroceryStoreApp/Pink.svg" alt="Fresh Market App on iPhone" class="hero-phone-mockup" />
+          </div>
+          
+          <!-- Scroll Down Arrow -->
+          <button class="scroll-down-arrow" onclick="scrollToNextSection()" aria-label="Scroll to next section">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </section>
+
+        <!-- Project Overview Section -->
+        <section class="overview-section" id="overview-section">
+          <div class="overview-container">
+            <h2 class="overview-title">Project Overview</h2>
+            <p class="overview-description">
+              Fresh Market is a high-fidelity UI prototype for a modern grocery shopping app. Focused on usability, clarity, and visual freshness, this design project blends clean interfaces with an organic feel.
+            </p>
+            <div class="overview-tags">
+              <span class="tag">Prototype</span>
+              <span class="tag">Mobile App</span>
+              <span class="tag">UI/UX Design</span>
+              <span class="tag">High Fidelity</span>
+              <span class="tag">Concept Project</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- UI Mockups Section -->
+        <section class="ui-mockups-section">
+          <div class="ui-mockups-container">
+            <!-- Combined header container -->
+            <div class="header-container">
+              <h2>High-Fidelity UI Mockups</h2>
+              <p>Interactive prototypes showcasing the complete user experience and refined visual design of the Grocery Store App.</p>
+            </div>
+            
+            <!-- Home Screen -->
+            <div class="mockup-screen">
+              <div class="mockup-content">
+                <div class="mockup-text">
+                  <h3 class="mockup-title">Home Screen</h3>
+                  <p class="mockup-description">The main landing page featuring personalized product recommendations, quick access to popular categories, and an intuitive search functionality. Users can easily navigate to their favorite sections and discover new products.</p>
+                </div>
+                <div class="mockup-image-wrapper">
+                  <img src="Assets/GroceryStoreApp/Home.svg" alt="Home Screen Mockup" class="mockup-screen-image">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Categories Screen -->
+            <div class="mockup-screen">
+              <div class="mockup-content">
+                <div class="mockup-text">
+                  <h3 class="mockup-title">Categories</h3>
+                  <p class="mockup-description">A comprehensive category browser allowing users to explore products by type. Features visual category cards with clear iconography and efficient filtering options for a streamlined shopping experience.</p>
+                </div>
+                <div class="mockup-image-wrapper">
+                  <img src="Assets/GroceryStoreApp/Categories.svg" alt="Categories Screen Mockup" class="mockup-screen-image">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product Details Screen -->
+            <div class="mockup-screen">
+              <div class="mockup-content">
+                <div class="mockup-text">
+                  <h3 class="mockup-title">Product Details</h3>
+                  <p class="mockup-description">Detailed product information page with high-quality images, comprehensive descriptions, pricing, and customer reviews. Includes quantity selection and add-to-cart functionality with clear call-to-action buttons.</p>
+                </div>
+                <div class="mockup-image-wrapper">
+                  <img src="Assets/GroceryStoreApp/Product info.svg" alt="Product Details Screen Mockup" class="mockup-screen-image">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Purchases Screen -->
+            <div class="mockup-screen">
+              <div class="mockup-content">
+                <div class="mockup-text">
+                  <h3 class="mockup-title">Purchases</h3>
+                  <p class="mockup-description">Shopping cart and checkout interface featuring order summary, payment options, and delivery preferences. Streamlined design ensures a quick and secure checkout process with clear cost breakdown.</p>
+                </div>
+                <div class="mockup-image-wrapper">
+                  <img src="Assets/GroceryStoreApp/Purchases.svg" alt="Purchases Screen Mockup" class="mockup-screen-image">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Store Details Screen -->
+            <div class="mockup-screen">
+              <div class="mockup-content">
+                <div class="mockup-text">
+                  <h3 class="mockup-title">Store Details</h3>
+                  <p class="mockup-description">Store information hub displaying location details, operating hours, contact information, and available services. Includes map integration and store-specific promotions for enhanced user convenience.</p>
+                </div>
+                <div class="mockup-image-wrapper">
+                  <img src="Assets/GroceryStoreApp/Store info.svg" alt="Store Details Screen Mockup" class="mockup-screen-image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Water Ripple Background Divider -->
+        <div class="background-divider water-ripple-bg">
+          <div class="ripple-overlay"></div>
+        </div>
+
+        <!-- Style Guide Section -->
+        <section class="style-guide-section">
+          <div class="style-guide-container">
+            <h2 class="style-guide-title">Style & Visual Language</h2>
+            <div class="style-guide-content">
+              <!-- Color Palette Side -->
+              <div class="color-palette-side">
+                <h3 class="palette-subtitle">Color Palette</h3>
+                <p class="palette-rule-description">The 60-30-10 rule creates visual balance: 60% neutral backgrounds, 30% secondary colors for structure, and 10% bold accents for highlights.</p>
+                <div class="color-swatches">
+                  <!-- 60% Group -->
+                  <div class="color-group">
+                    <div class="color-group-left">
+                      <span class="color-group-label">60%</span>
+                      <div class="color-row">
+                        <div class="color-item">
+                          <div class="color-swatch color-white"></div>
+                          <span class="color-code">#FFFFFF</span>
+                        </div>
+                        <div class="color-item">
+                          <div class="color-swatch color-light-gray"></div>
+                          <span class="color-code">#F1F1F1</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="color-group-description">
+                      <p>Clean, neutral backgrounds for readability</p>
+                    </div>
+                  </div>
+                  
+                  <!-- 30% Group -->
+                  <div class="color-group">
+                    <div class="color-group-left">
+                      <span class="color-group-label">30%</span>
+                      <div class="color-row">
+                        <div class="color-item">
+                          <div class="color-swatch color-medium-gray"></div>
+                          <span class="color-code">#A4A4A4</span>
+                        </div>
+                        <div class="color-item">
+                          <div class="color-swatch color-dark-gray"></div>
+                          <span class="color-code">#383838</span>
+                        </div>
+                        <div class="color-item">
+                          <div class="color-swatch color-very-dark"></div>
+                          <span class="color-code">#191919</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="color-group-description">
+                      <p>Text and structural elements</p>
+                    </div>
+                  </div>
+                  
+                  <!-- 10% Group -->
+                  <div class="color-group">
+                    <div class="color-group-left">
+                      <span class="color-group-label">10%</span>
+                      <div class="color-row">
+                        <div class="color-item">
+                          <div class="color-swatch color-green"></div>
+                          <span class="color-code">#6DA920</span>
+                        </div>
+                        <div class="color-item">
+                          <div class="color-swatch color-orange"></div>
+                          <span class="color-code">#FFA400</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="color-group-description">
+                      <p>Brand colors for buttons and highlights</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Typography Side -->
+              <div class="typography-side">
+                <h3 class="typography-subtitle">Typography Hierarchy</h3>
+                <div class="typography-main-font">
+                  <h2 class="typography-font-name">Myriad Pro</h2>
+                </div>
+                <div class="typography-samples">
+                  <!-- H1 Sample -->
+                  <div class="type-sample">
+                    <div class="type-label-container">
+                      <span class="type-label-tag">H1 - 31px</span>
+                    </div>
+                    <h1 class="sample-h1-myriad">Clean, modern typography that ensures readability across all interface elements</h1>
+                  </div>
+                  
+                  <!-- H2 Sample -->
+                  <div class="type-sample">
+                    <div class="type-label-container">
+                      <span class="type-label-tag">H2 - 19px</span>
+                    </div>
+                    <h2 class="sample-h2-myriad">Clean, modern typography that ensures readability across all interface elements</h2>
+                  </div>
+                  
+                  <!-- H3 Sample -->
+                  <div class="type-sample">
+                    <div class="type-label-container">
+                      <span class="type-label-tag">H3 - 12px</span>
+                    </div>
+                    <h3 class="sample-h3-myriad">Clean, modern typography that ensures readability across all interface elements</h3>
+                  </div>
+                  
+                  <!-- Font Weight Samples -->
+                  <div class="type-sample font-weight-samples">
+                    <div class="weight-comparison">
+                      <span class="myriad-regular">Mm</span>
+                      <span class="myriad-bold">Mm</span>
+                    </div>
+                    <p class="sample-label">Regular & Bold Weights</p>
+                  </div>
+                </div>
+                <p class="typography-description">
+                  Myriad Pro provides excellent readability and a professional appearance throughout the entire application interface.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Low-Fidelity Planning Section -->
+        <section class="low-fidelity-sketches-container">
+          <h2 class="low-fidelity-sketches-title">Low-Fidelity Planning</h2>
+          <p class="low-fidelity-sketches-description">
+            These initial sketches formed the foundation for the high-fidelity designs shown above. Through rapid low-fidelity explorations, I validated core layout structures and navigation patterns, allowing me to iterate quickly and identify the most intuitive user flows before investing time in detailed visual design.
+          </p>
+          
+          <div class="sketches-grid">
+            <div class="sketch-item">
+              <img src="Assets/GroceryStoreApp/Home SKETCH.svg" alt="Home screen initial sketch" class="sketch-image" />
+              <h3 class="sketch-label">Home Layout Exploration</h3>
+            </div>
+            
+            <div class="sketch-item">
+              <img src="Assets/GroceryStoreApp/Using search bar SKETCH.svg" alt="Search functionality sketch" class="sketch-image" />
+              <h3 class="sketch-label">Search & Navigation Flow</h3>
+            </div>
+            
+            <div class="sketch-item">
+              <img src="Assets/GroceryStoreApp/SKETCH.svg" alt="General interface sketch" class="sketch-image" />
+              <h3 class="sketch-label">Interface Structure</h3>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interactive Prototype Section -->
+        <!-- Try the Experience Section -->
+        <section class="try-experience-section">
+          <div class="try-experience-wrapper">
+            <h2 class="prototype-title">Try the Experience</h2>
+            <p class="prototype-subtitle">Explore the full user flow through our interactive prototype</p>
+            
+            <!-- Navigation Buttons -->
+            <div class="prototype-nav">
+              <button class="prototype-nav-btn active" data-prototype="1">Home Flow</button>
+              <button class="prototype-nav-btn" data-prototype="2">Categories</button>
+              <button class="prototype-nav-btn" data-prototype="3">Product Info</button>
+              <button class="prototype-nav-btn" data-prototype="4">Checkout</button>
+            </div>
+            
+            <div class="prototype-content">
+              <!-- Figma Embed 1 -->
+              <div class="figma-embed active" data-prototype-content="1">
+                <div class="figma-frame">
+                  <iframe 
+                    style="border: 1px solid rgba(0, 0, 0, 0.1);" 
+                    width="100%" 
+                    height="600" 
+                    src="https://embed.figma.com/proto/lGxgZH7rotuvmCi9AMzY1Q/Grocery-Store-App?node-id=313-7267&embed-host=share" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+              
+              <!-- Figma Embed 2 -->
+              <div class="figma-embed" data-prototype-content="2">
+                <div class="figma-frame">
+                  <iframe 
+                    style="border: 1px solid rgba(0, 0, 0, 0.1);" 
+                    width="100%" 
+                    height="600" 
+                    src="https://embed.figma.com/proto/lGxgZH7rotuvmCi9AMzY1Q/Grocery-Store-App?node-id=313-9460&embed-host=share" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+              
+              <!-- Figma Embed 3 -->
+              <div class="figma-embed" data-prototype-content="3">
+                <div class="figma-frame">
+                  <iframe 
+                    style="border: 1px solid rgba(0, 0, 0, 0.1);" 
+                    width="100%" 
+                    height="600" 
+                    src="https://embed.figma.com/proto/lGxgZH7rotuvmCi9AMzY1Q/Grocery-Store-App?node-id=313-10152&embed-host=share" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+              
+              <!-- Figma Embed 4 -->
+              <div class="figma-embed" data-prototype-content="4">
+                <div class="figma-frame">
+                  <iframe 
+                    style="border: 1px solid rgba(0, 0, 0, 0.1);" 
+                    width="100%" 
+                    height="600" 
+                    src="https://embed.figma.com/proto/lGxgZH7rotuvmCi9AMzY1Q/Grocery-Store-App?node-id=326-8925&embed-host=share" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+            </div>
+            
+            <p class="figma-note">Click and interact with the live prototype above</p>
+          </div>
+        </section>
+
+        <!-- User Flow Demonstration Section -->
+        <section class="user-flow-section">
+          <div class="video-demo">
+            <h3 class="demo-title">User Flow Demonstration</h3>
+            <div class="video-frame">
+              <video controls poster="Assets/GroceryStoreApp/Home.svg">
+                <source src="Assets/GroceryStoreApp/user-flow-demo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="video-description">
+              Watch the complete user journey from browsing to checkout in under 2 minutes.
+            </p>
+          </div>
+        </section>
+
+        <!-- Key Interactions Section -->
+        <section class="key-interactions-section">
+          <div class="key-interactions-container">
+            <h2 class="interactions-title">Key Interactions</h2>
+            <div class="interactions-grid">
+              <div class="interaction-item">
+                <div class="interaction-icon">📱</div>
+                <h4>Home Navigation</h4>
+                <p>Swipe through featured products and categories</p>
+              </div>
+              <div class="interaction-item">
+                <div class="interaction-icon">🔍</div>
+                <h4>Search & Filter</h4>
+                <p>Smart search with category filtering</p>
+              </div>
+              <div class="interaction-item">
+                <div class="interaction-icon">🛒</div>
+                <h4>Add to Cart</h4>
+                <p>One-tap adding with quantity controls</p>
+              </div>
+              <div class="interaction-item">
+                <div class="interaction-icon">🧾</div>
+                <h4>Quick Checkout</h4>
+                <p>Streamlined payment process</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Closing Section -->
+        <section class="closing-section">
+          <div class="closing-container">
+            <h2 class="closing-title">Freshly Designed for a Fresh Experience</h2>
+            
+            <div class="closing-image">
+              <img src="Assets/GroceryStoreApp/Black.svg" alt="Fresh Market app being used in kitchen" class="context-image" />
+            </div>
+            
+            <div class="closing-content">
+              <p class="closing-text">
+                Thanks for scrolling! This was a personal prototype project focused on UI design and aesthetic coherence for the food tech space.
+              </p>
+              
+              <div class="closing-cta">
+                <p class="cta-text">Want to collaborate on fresh ideas?</p>
+                <a href="mailto:viniciusgallipim@gmail.com" class="cta-button">Let's Connect</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Other Projects Section -->
+        <section class="other-projects-section">
+          <div class="other-projects-container">
+            <h2 class="other-projects-title">Other Projects</h2>
+            <div class="projects-grid" data-other-projects="grocery" data-max="2"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="fundo-footer"></div>
+        <div class="footer-sections">
+          <!-- GET IN TOUCH Section -->
+          <div class="footer-section">
+            <h2 class="footer-title footerTitleTypography">GET IN TOUCH</h2>
+            <div class="get-in-touch-grid footerTextTypography">
+              <div class="get-in-touch-item">
+                <a href="mailto:viniciusgallipim@gmail.com" class="underline">Email contact</a>
+              </div>
+              <div class="get-in-touch-item">
+                <a href="https://www.freelancer.com/u/ViniciusPim" target="_blank" class="underline">Hire me on Freelancer</a>
+              </div>
+            </div>
+          </div>
+          <!-- SOCIAL MEDIA Section -->
+          <div class="footer-section">
+            <h2 class="footer-title footerTitleTypography">SOCIAL MEDIA</h2>
+            <div class="social-media-grid footerTextTypography">
+              <div><a href="https://www.artstation.com/stormzada" target="_blank">ArtStation</a></div>
+              <div><a href="https://wa.me/353830334178" target="_blank">WhatsApp</a></div>
+              <div><a href="https://www.linkedin.com/in/vinicius-galli-pim/" target="_blank">LinkedIn</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
