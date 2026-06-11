@@ -1,28 +1,105 @@
 ﻿// ---- Loading Screen Logic ----
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
   const loadingScreen = document.getElementById('loading-screen');
+  const heroVideo = document.querySelector('.hero-video video');
+  
   if (loadingScreen) {
-    // Add fade-out class to trigger transition
-    loadingScreen.classList.add('fade-out');
-    
-    // Remove the element completely after transition and start video
-    setTimeout(() => {
-      loadingScreen.style.display = 'none';
+    // For grocery page with video: wait for first frame (metadata) instead of full video
+    if (heroVideo) {
+      let videoLoaded = false;
+      let fallbackTriggered = false;
       
-      // Signal that the loading screen is fully gone — theme transitions can now begin
-      document.dispatchEvent(new CustomEvent('loadingScreenHidden'));
-
-      // Start video playback on grocery store page after loading screen disappears
-      const heroVideo = document.querySelector('.hero-video video');
-      if (heroVideo) {
-        heroVideo.play().catch(e => {
-          // Handle autoplay restrictions gracefully
-          console.log('Video autoplay was prevented:', e);
-        });
+      // Extract first frame as fallback image
+      function createVideoFallback() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = heroVideo.videoWidth || 1920;
+        canvas.height = heroVideo.videoHeight || 1080;
+        
+        // Draw the current frame
+        ctx.drawImage(heroVideo, 0, 0, canvas.width, canvas.height);
+        
+        // Create an image element
+        const posterImg = document.createElement('img');
+        posterImg.className = 'hero-video-fallback';
+        posterImg.src = canvas.toDataURL('image/jpeg', 0.8);
+        posterImg.style.cssText = 'width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;';
+        
+        // Hide video, show image
+        heroVideo.style.opacity = '0';
+        heroVideo.parentElement.insertBefore(posterImg, heroVideo);
+        
+        return posterImg;
       }
-    }, 200); // Match the transition duration in CSS
+      
+      // Show first frame immediately and hide loading screen
+      heroVideo.addEventListener('loadeddata', function() {
+        if (!fallbackTriggered) {
+          videoLoaded = true;
+          
+          // First frame is ready - hide loading screen
+          loadingScreen.classList.add('fade-out');
+          
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            document.dispatchEvent(new CustomEvent('loadingScreenHidden'));
+            
+            // Start playing video once it can play through
+            heroVideo.play().catch(e => {
+              console.log('Video autoplay was prevented:', e);
+            });
+          }, 200);
+        }
+      }, { once: true });
+      
+      // Fallback: if video takes too long, show static frame
+      setTimeout(() => {
+        if (!videoLoaded && loadingScreen.style.display !== 'none') {
+          fallbackTriggered = true;
+          
+          // Try to extract a frame if video has any data
+          if (heroVideo.readyState >= 1) {
+            createVideoFallback();
+          }
+          
+          // Hide loading screen
+          loadingScreen.classList.add('fade-out');
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            document.dispatchEvent(new CustomEvent('loadingScreenHidden'));
+          }, 200);
+          
+          // When video finally loads, swap back to video
+          heroVideo.addEventListener('canplay', function() {
+            const fallbackImg = document.querySelector('.hero-video-fallback');
+            if (fallbackImg) {
+              heroVideo.style.opacity = '1';
+              heroVideo.style.transition = 'opacity 0.5s ease';
+              fallbackImg.style.transition = 'opacity 0.5s ease';
+              fallbackImg.style.opacity = '0';
+              
+              setTimeout(() => {
+                fallbackImg.remove();
+                heroVideo.play().catch(e => {
+                  console.log('Video autoplay was prevented:', e);
+                });
+              }, 500);
+            }
+          }, { once: true });
+        }
+      }, 3000); // 3 second fallback
+    } else {
+      // Non-video pages: wait for window load
+      window.addEventListener('load', function() {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+          document.dispatchEvent(new CustomEvent('loadingScreenHidden'));
+        }, 200);
+      });
+    }
   } else {
-    // No loading screen on this page — signal immediately when window is ready
+    // No loading screen on this page — signal immediately
     document.dispatchEvent(new CustomEvent('loadingScreenHidden'));
   }
 });
